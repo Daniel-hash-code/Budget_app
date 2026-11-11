@@ -3,7 +3,446 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>RoomieBudget | Settings</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+
+  <body>
+    <div class="app-container" id="appContainer">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="sidebar">
+        <div class="logo">
+          <h2>Roomie<span>Budget</span></h2>
+        </div>
+
+        <nav class="navigation">
+          <p class="nav-heading">OVERVIEW</p>
+          <a href="index.html" class="nav-link"> <span>⌂</span> Dashboard </a>
+
+          <p class="nav-heading">PERSONAL FINANCES</p>
+          <a href="my-budget.html" class="nav-link">
+            <span>◉</span> My Budget
+          </a>
+          <a href="personal-expenses.html" class="nav-link">
+            <span>▤</span> Personal Expenses
+          </a>
+          <a href="saving-goals.html" class="nav-link">
+            <span>♧</span> Savings Goals
+          </a>
+
+          <p class="nav-heading">SHARED FINANCES</p>
+          <a href="households.html" class="nav-link">
+            <span>⌂</span> My Households
+          </a>
+          <a href="roommates.html" class="nav-link">
+            <span>♙</span> Roommates
+          </a>
+          <a href="shared-expenses.html" class="nav-link">
+            <span>▣</span> Shared Expenses
+          </a>
+          <a href="settlements.html" class="nav-link">
+            <span>⇄</span> Settlements
+          </a>
+
+          <p class="nav-heading">MANAGEMENT</p>
+          <a href="categories.html" class="nav-link">
+            <span>▦</span> Categories & Products
+          </a>
+          <a href="reports.html" class="nav-link">
+            <span>▥</span> Reports & Analytics
+          </a>
+          <a href="settings.html" class="nav-link active">
+            <span>⚙</span> Settings
+          </a>
+        </nav>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button
+              class="menu-toggle"
+              id="menuToggle"
+              aria-label="Toggle navigation"
+            >
+              ☰
+            </button>
+            <h2 id="pageTitle">Settings</h2>
+          </div>
+
+          <div class="profile">
+            <span>Welcome!</span>
+          </div>
+        </header>
+
+        <section class="page-content settings-page">
+          <div class="dashboard-header">
+            <div>
+              <h1>Settings</h1>
+              <p>
+                Manage your preferences and customize your RoomieBudget
+                experience.
+              </p>
+            </div>
+          </div>
+
+          <!-- 1. BUDGET AND PERIOD SETTINGS -->
+          <div class="dashboard-card settings-card">
+            <div class="settings-heading">
+              <div class="settings-icon">▦</div>
+              <div>
+                <h3>Budget & Period Settings</h3>
+                <p>Manage semesters and financial reporting periods.</p>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <h4>Semester Configuration</h4>
+              <p class="settings-description">
+                Add academic semesters and define their date ranges.
+              </p>
+
+              <form id="semesterForm">
+                <div class="settings-form-grid">
+                  <div class="form-group">
+                    <label for="semesterName">Semester Name</label>
+                    <input
+                      type="text"
+                      id="semesterName"
+                      placeholder="e.g. Semester 1 - 2026/2027"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="semesterStart">Start Date</label>
+                    <input type="date" id="semesterStart" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="semesterEnd">End Date</label>
+                    <input type="date" id="semesterEnd" required />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  class="settings-save-btn"
+                  id="semesterSubmitBtn"
+                >
+                  Add Semester
+                </button>
+                <button
+                  type="button"
+                  class="settings-cancel-btn"
+                  id="cancelSemesterEdit"
+                  hidden
+                >
+                  Cancel Edit
+                </button>
+              </form>
+
+              <div class="saved-semesters">
+                <h4>Saved Semesters</h4>
+                <div id="semesterList">
+                  <p class="settings-empty">No semesters added yet.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-divider"></div>
+
+            <div class="settings-section">
+              <h4>Dashboard Reporting Period</h4>
+              <p class="settings-description">
+                Choose the period that should appear when you open the
+                dashboard.
+              </p>
+
+              <div class="form-group settings-narrow">
+                <label for="defaultPeriod">Default Dashboard Period</label>
+                <select id="defaultPeriod">
+                  <option value="today">Today</option>
+                  <option value="week">This Week</option>
+                  <option value="month">This Month</option>
+                  <option value="semester">This Semester</option>
+                  <option value="year">This Year</option>
+                  <option value="custom">Custom Range</option>
+                </select>
+              </div>
+
+              <div id="defaultCustomRange" class="settings-form-grid" hidden>
+                <div class="form-group">
+                  <label for="defaultCustomStart">From</label>
+                  <input type="date" id="defaultCustomStart" />
+                </div>
+                <div class="form-group">
+                  <label for="defaultCustomEnd">To</label>
+                  <input type="date" id="defaultCustomEnd" />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="settings-save-btn"
+                id="savePeriodSettings"
+              >
+                Save Period Preference
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. PERSONAL BUDGET PREFERENCES -->
+          <div class="dashboard-card settings-card">
+            <div class="settings-heading">
+              <div class="settings-icon">◉</div>
+              <div>
+                <h3>Personal Budget Preferences</h3>
+                <p>Set your preferred budget and currency options.</p>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-form-grid">
+                <div class="form-group">
+                  <label for="defaultBudget">Default Budget Amount</label>
+                  <input
+                    type="number"
+                    id="defaultBudget"
+                    min="0"
+                    step="0.01"
+                    placeholder="e.g. 10000"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="budgetPeriod">Budget Period</label>
+                  <select id="budgetPeriod">
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="semester">Semester</option>
+                    <option value="yearly">Yearly</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="currency">Currency</label>
+                  <select id="currency">
+                    <option value="KES">Kenyan Shilling (KSh)</option>
+                    <option value="USD">US Dollar ($)</option>
+                    <option value="EUR">Euro (€)</option>
+                    <option value="GBP">British Pound (£)</option>
+                    <option value="UGX">Ugandan Shilling (USh)</option>
+                    <option value="TZS">Tanzanian Shilling (TSh)</option>
+                  </select>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="settings-save-btn"
+                id="saveBudgetSettings"
+              >
+                Save Budget Preferences
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. HOUSEHOLD PREFERENCES -->
+          <div class="dashboard-card settings-card">
+            <div class="settings-heading">
+              <div class="settings-icon">⌂</div>
+              <div>
+                <h3>Household Preferences</h3>
+                <p>Set your preferred options for shared finances.</p>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-form-grid">
+                <div class="form-group">
+                  <label for="defaultSharing">Default Expense Sharing</label>
+                  <select id="defaultSharing">
+                    <option value="equal">Split Equally</option>
+                    <option value="custom">Custom Shares</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="settlementPreference"
+                    >Settlement Preference</label
+                  >
+                  <select id="settlementPreference">
+                    <option value="manual">Manual Confirmation</option>
+                    <option value="automatic">Automatic Calculation</option>
+                  </select>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="settings-save-btn"
+                id="saveHouseholdSettings"
+              >
+                Save Household Preferences
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. NOTIFICATIONS -->
+          <div class="dashboard-card settings-card">
+            <div class="settings-heading">
+              <div class="settings-icon">♧</div>
+              <div>
+                <h3>Notifications</h3>
+                <p>Choose which updates you want to receive.</p>
+              </div>
+            </div>
+
+            <div class="settings-section notification-list">
+              <label class="setting-toggle">
+                <span>
+                  <strong>Budget Alerts</strong>
+                  <small
+                    >Receive alerts when approaching your budget limit.</small
+                  >
+                </span>
+                <input type="checkbox" id="budgetAlerts" />
+              </label>
+
+              <label class="setting-toggle">
+                <span>
+                  <strong>Expense Updates</strong>
+                  <small
+                    >Receive updates when expenses are recorded or
+                    edited.</small
+                  >
+                </span>
+                <input type="checkbox" id="expenseAlerts" />
+              </label>
+
+              <label class="setting-toggle">
+                <span>
+                  <strong>Settlement Reminders</strong>
+                  <small
+                    >Get reminders about pending household settlements.</small
+                  >
+                </span>
+                <input type="checkbox" id="settlementAlerts" />
+              </label>
+
+              <label class="setting-toggle">
+                <span>
+                  <strong>Savings Goal Updates</strong>
+                  <small>Receive updates on your savings progress.</small>
+                </span>
+                <input type="checkbox" id="savingsAlerts" />
+              </label>
+
+              <button
+                type="button"
+                class="settings-save-btn"
+                id="saveNotificationSettings"
+              >
+                Save Notifications
+              </button>
+            </div>
+          </div>
+
+          <!-- 5. ACCOUNT AND PROFILE -->
+          <div class="dashboard-card settings-card">
+            <div class="settings-heading">
+              <div class="settings-icon">♙</div>
+              <div>
+                <h3>Account & Profile</h3>
+                <p>Manage your personal profile information.</p>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-form-grid">
+                <div class="form-group">
+                  <label for="profileName">Full Name</label>
+                  <input
+                    type="text"
+                    id="profileName"
+                    placeholder="Enter your name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="profileEmail">Email Address</label>
+                  <input
+                    type="email"
+                    id="profileEmail"
+                    placeholder="Enter your email"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="profilePhone">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="profilePhone"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="settings-save-btn"
+                id="saveProfileSettings"
+              >
+                Save Profile
+              </button>
+            </div>
+          </div>
+
+          <!-- 6. PRIVACY AND DATA -->
+          <div class="dashboard-card settings-card">
+            <div class="settings-heading">
+              <div class="settings-icon">◇</div>
+              <div>
+                <h3>Privacy & Data Management</h3>
+                <p>Manage and export your locally stored preferences.</p>
+              </div>
+            </div>
+
+            <div class="settings-section data-management">
+              <div>
+                <strong>Export Settings</strong>
+                <p class="settings-description">
+                  Download a copy of your current RoomieBudget preferences.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                class="settings-save-btn"
+                id="exportSettings"
+              >
+                Export Settings
+              </button>
+            </div>
+          </div>
+
+          <p class="settings-footer">
+            RoomieBudget settings are currently saved on this browser. Cloud
+            synchronization will be added when the backend is connected.
+          </p>
+
+          <div
+            id="settingsMessage"
+            class="settings-message"
+            role="status"
+            aria-live="polite"
+          ></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
