@@ -1,0 +1,1028 @@
+/* GENERAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f7f5;
+  color: #222;
+}
+
+/* MAIN APPLICATION LAYOUT */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  background-color: #111;
+  color: white;
+  padding: 25px 15px;
+}
+
+/* LOGO */
+.logo {
+  padding: 10px;
+  margin-bottom: 35px;
+}
+
+.logo h2 {
+  font-size: 23px;
+}
+
+.logo span {
+  color: #32a852;
+}
+
+/* NAVIGATION */
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.nav-heading {
+  font-size: 11px;
+  color: #999;
+  font-weight: bold;
+  margin: 22px 10px 8px;
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #ccc;
+  padding: 12px 14px;
+  border-radius: 7px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.nav-link span {
+  width: 20px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.nav-link:hover {
+  background-color: #252525;
+  color: white;
+}
+
+/* ACTIVE NAVIGATION TAB */
+.nav-link.active {
+  background-color: #218c43;
+  color: white;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* TOP BAR */
+.topbar {
+  background-color: white;
+  padding: 22px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.topbar h2 {
+  font-size: 21px;
+}
+
+.profile {
+  color: #555;
+  font-size: 14px;
+}
+
+/* PAGE CONTENT */
+.page-content {
+  padding: 35px;
+}
+
+.page-content h1 {
+  margin-bottom: 12px;
+}
+
+.page-content p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* TOP BAR LEFT SECTION */
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* MENU TOGGLE BUTTON */
+.menu-toggle {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 7px;
+  background-color: #f0f5f0;
+  color: #222;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background-color: #218c43;
+  color: white;
+}
+
+/* SMOOTH SIDEBAR SLIDING */
+.sidebar {
+  flex: 0 0 250px;
+  transition:
+    transform 0.35s ease,
+    margin-left 0.35s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* SIDEBAR CLOSED */
+.app-container.sidebar-closed .sidebar {
+  transform: translateX(-100%);
+  margin-left: -250px;
+}
+
+/* IMPROVED NAVIGATION HOVER */
+.nav-link {
+  position: relative;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    padding-left 0.25s ease;
+}
+
+.nav-link:hover {
+  background-color: #218c43;
+  color: white;
+  padding-left: 20px;
+}
+
+/* ACTIVE TAB */
+.nav-link.active {
+  background-color: #218c43;
+  color: white;
+}
+
+/* BUTTON FOCUS FOR KEYBOARD USERS */
+.menu-toggle:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid #32a852;
+  outline-offset: 3px;
+}
+
+/* SMALL SCREEN ADJUSTMENTS */
+@media (max-width: 700px) {
+  .sidebar {
+    flex-basis: 230px;
+  }
+
+  .app-container.sidebar-closed .sidebar {
+    margin-left: -230px;
+  }
+
+  .page-content {
+    padding: 20px;
+  }
+
+  .topbar {
+    padding: 15px;
+  }
+}
+
+/* ==============================
+   DASHBOARD HEADER
+================================= */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.dashboard-header h1 {
+  font-size: 25px;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.dashboard-header p {
+  color: #777;
+  font-size: 14px;
+}
+
+.dashboard-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dashboard-filter label {
+  font-size: 13px;
+  color: #555;
+}
+
+.dashboard-filter select {
+  padding: 10px 13px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  background: white;
+  color: #333;
+  cursor: pointer;
+}
+
+/* ==============================
+   FOUR SUMMARY TILES
+================================= */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.summary-card {
+  background: white;
+  padding: 22px;
+  border: 1px solid #eeeeee;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  margin-bottom: 16px;
+}
+
+.green-icon {
+  background: #e8f5eb;
+  color: #218c43;
+}
+
+.dark-icon {
+  background: #eeeeee;
+  color: #222;
+}
+
+.summary-card p {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 9px;
+}
+
+.summary-card h2 {
+  font-size: 23px;
+  color: #222;
+  margin-bottom: 9px;
+}
+
+.summary-card .card-note {
+  font-size: 12px;
+  color: #888;
+}
+
+.positive-balance {
+  color: #218c43 !important;
+}
+
+/* ==============================
+   MIDDLE DASHBOARD SECTION
+================================= */
+
+.dashboard-middle {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+/* ==============================
+   DASHBOARD CARDS
+================================= */
+
+.dashboard-card {
+  background: white;
+  border: 1px solid #eeeeee;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  min-width: 0;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.section-heading h3 {
+  font-size: 16px;
+  color: #222;
+  margin-bottom: 7px;
+}
+
+.section-heading p {
+  font-size: 12px;
+  color: #888;
+}
+
+.percentage {
+  color: #218c43;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+/* ==============================
+   BUDGET PROGRESS BAR
+================================= */
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #eeeeee;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 13px;
+}
+
+.progress-fill {
+  width: 60%;
+  height: 100%;
+  background: #218c43;
+  border-radius: 20px;
+}
+
+.progress-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* ==============================
+   HOUSEHOLD OVERVIEW
+================================= */
+
+.household-info {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.household-info div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.household-info span {
+  font-size: 13px;
+  color: #777;
+}
+
+.household-info strong {
+  font-size: 13px;
+  color: #222;
+  text-align: right;
+}
+
+/* ==============================
+   LOWER DASHBOARD SECTION
+================================= */
+
+.dashboard-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 260px;
+}
+
+/* ==============================
+   RECENT TRANSACTIONS
+================================= */
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.transaction-item div strong {
+  font-size: 13px;
+  color: #333;
+}
+
+.transaction-item div span {
+  font-size: 11px;
+  color: #999;
+}
+
+.transaction-item > strong {
+  font-size: 13px;
+  color: #333;
+}
+
+/* ==============================
+   RESPONSIVE DASHBOARD
+================================= */
+
+@media (max-width: 1100px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 750px) {
+  .dashboard-middle,
+  .dashboard-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 450px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-card h2 {
+    font-size: 20px;
+  }
+
+  .progress-details {
+    flex-direction: column;
+  }
+
+  .household-info div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* ==============================
+   COLLAPSED SIDEBAR
+================================= */
+
+.sidebar {
+  transition:
+    width 0.35s ease,
+    flex-basis 0.35s ease,
+    padding 0.35s ease;
+}
+
+/* Keep the sidebar visible but narrow */
+.app-container.sidebar-collapsed .sidebar {
+  width: 76px;
+  flex: 0 0 76px;
+  padding: 25px 10px;
+  margin-left: 0;
+  transform: none;
+}
+
+/* Change logo into a compact RB mark */
+.app-container.sidebar-collapsed .logo h2 {
+  font-size: 0;
+  text-align: center;
+}
+
+.app-container.sidebar-collapsed .logo h2::after {
+  content: "RB";
+  font-size: 21px;
+  color: #32a852;
+}
+
+/* Hide section headings */
+.app-container.sidebar-collapsed .nav-heading {
+  display: none;
+}
+
+/* Centre the navigation icons */
+.app-container.sidebar-collapsed .nav-link {
+  justify-content: center;
+  padding: 13px 5px;
+  font-size: 0;
+  position: relative;
+}
+
+/* Keep icons visible */
+.app-container.sidebar-collapsed .nav-link span {
+  font-size: 20px;
+  width: auto;
+}
+
+/* ==============================
+   NAVIGATION TOOLTIP
+================================= */
+
+.app-container.sidebar-collapsed .nav-link::after {
+  content: attr(data-tooltip);
+
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: #222;
+  color: white;
+
+  padding: 9px 13px;
+  border-radius: 6px;
+
+  font-size: 12px;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+  z-index: 1000;
+
+  transition: opacity 0.2s ease;
+}
+
+/* Show tooltip on hover */
+.app-container.sidebar-collapsed .nav-link:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Prevent the logo from taking too much space */
+.app-container.sidebar-collapsed .logo {
+  padding: 10px 0;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+/* Small screen adjustment */
+@media (max-width: 700px) {
+  .app-container.sidebar-collapsed .sidebar {
+    width: 65px;
+    flex-basis: 65px;
+  }
+}
+.sidebar {
+  overflow: visible;
+}
+
+/* ADDITIONAL DASHBOARD ANALYTICS */
+
+.dashboard-analytics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+@media (max-width: 750px) {
+  .dashboard-analytics {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================================
+   ROOMIEBUDGET SETTINGS PAGE
+===================================== */
+
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.settings-card {
+  width: 100%;
+}
+
+.settings-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.settings-heading h3 {
+  font-size: 16px;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.settings-heading p,
+.settings-description {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.6;
+}
+
+.settings-icon {
+  width: 43px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #e8f5eb;
+  color: #218c43;
+  font-size: 22px;
+}
+
+.settings-section h4 {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 7px;
+}
+
+.settings-section > .settings-description {
+  margin-bottom: 20px;
+}
+
+.settings-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  background: white;
+  color: #333;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #218c43;
+}
+
+.settings-save-btn,
+.settings-cancel-btn {
+  border: none;
+  border-radius: 7px;
+  padding: 11px 17px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.settings-save-btn {
+  background: #218c43;
+  color: white;
+}
+
+.settings-save-btn:hover {
+  background: #176d32;
+}
+
+.settings-cancel-btn {
+  background: #eeeeee;
+  color: #444;
+  margin-left: 7px;
+}
+
+.settings-cancel-btn:hover {
+  background: #dddddd;
+}
+
+.settings-divider {
+  height: 1px;
+  background: #eeeeee;
+  margin: 27px 0;
+}
+
+.saved-semesters {
+  margin-top: 27px;
+}
+
+.saved-semesters h4 {
+  margin-bottom: 13px;
+}
+
+.semester-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 14px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.semester-item:last-child {
+  border-bottom: none;
+}
+
+.semester-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.semester-details strong {
+  font-size: 13px;
+  color: #333;
+}
+
+.semester-details span {
+  font-size: 11px;
+  color: #888;
+}
+
+.semester-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.semester-actions button {
+  border: none;
+  background: #f1f1f1;
+  color: #444;
+  border-radius: 5px;
+  padding: 7px 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.semester-actions button:hover {
+  background: #e5e5e5;
+}
+
+.semester-actions .delete-semester {
+  color: #b42318;
+}
+
+.settings-empty {
+  color: #999;
+  font-size: 12px;
+  padding: 10px 0;
+}
+
+.settings-narrow {
+  max-width: 350px;
+  margin: 20px 0;
+}
+
+.setting-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid #eeeeee;
+  cursor: pointer;
+}
+
+.setting-toggle:first-child {
+  padding-top: 0;
+}
+
+.setting-toggle span {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.setting-toggle strong {
+  font-size: 13px;
+  color: #333;
+}
+
+.setting-toggle small {
+  font-size: 11px;
+  color: #888;
+  line-height: 1.5;
+}
+
+.setting-toggle input {
+  width: 17px;
+  height: 17px;
+  accent-color: #218c43;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.notification-list .settings-save-btn {
+  margin-top: 20px;
+}
+
+.data-management {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.settings-footer {
+  color: #999;
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.6;
+  padding: 5px 0;
+}
+
+.settings-message {
+  display: none;
+  padding: 12px 15px;
+  border-radius: 7px;
+  background: #e8f5eb;
+  color: #176d32;
+  font-size: 12px;
+}
+
+.settings-message.show {
+  display: block;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* SETTINGS RESPONSIVENESS */
+@media (max-width: 850px) {
+  .settings-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .settings-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .data-management {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .semester-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .semester-actions {
+    width: 100%;
+  }
+}
+
+/* FIXED SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+/* MAIN CONTENT POSITION */
+.main-content {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  transition:
+    margin-left 0.35s ease,
+    width 0.35s ease;
+}
+
+/* WHEN SIDEBAR IS COLLAPSED */
+.app-container.sidebar-collapsed .main-content {
+  margin-left: 76px;
+  width: calc(100% - 76px);
+}
+
+/* SMALL SCREENS */
+@media (max-width: 700px) {
+  .app-container.sidebar-collapsed .sidebar {
+    width: 65px;
+    flex-basis: 65px;
+  }
+
+  .app-container.sidebar-collapsed .main-content {
+    margin-left: 65px;
+    width: calc(100% - 65px);
+  }
+}
+
+/* BACK TO TOP BUTTON */
+.back-to-top {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: #218c43;
+  color: white;
+  font-size: 23px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all 0.3s ease;
+  z-index: 2000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: #176d32;
+  transform: translateY(-4px);
+}
