@@ -769,6 +769,7 @@ refreshDashboard();
   const settingsKey = "roomieBudgetSettings";
 
   const defaultSettings = {
+    theme: "system",
     semesters: [],
     defaultPeriod: "month",
     customStart: "",
@@ -821,6 +822,35 @@ refreshDashboard();
   let settings = loadSettings();
   let editingSemesterId = null;
 
+
+  // -----------------------------------------
+  // THEME PREFERENCES
+  // -----------------------------------------
+
+  const systemThemePreference = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function applyTheme(preference = settings.theme) {
+    const activeTheme =
+      preference === "system"
+        ? systemThemePreference.matches
+          ? "dark"
+          : "light"
+        : preference;
+
+    document.documentElement.setAttribute("data-theme", activeTheme);
+  }
+
+  // Apply the saved theme on every page.
+  applyTheme();
+
+  // Update the theme if the operating system preference changes.
+  systemThemePreference.addEventListener("change", function () {
+    if (settings.theme === "system") {
+      applyTheme();
+    }
+  });
+
+
   function saveSettings() {
     try {
       localStorage.setItem(settingsKey, JSON.stringify(settings));
@@ -844,6 +874,25 @@ refreshDashboard();
       messageBox.classList.remove("show");
     }, 3500);
   }
+
+
+  // -----------------------------------------
+  // APPEARANCE PREFERENCES
+  // -----------------------------------------
+
+  const themePreference = document.getElementById("themePreference");
+
+  if (themePreference) {
+    themePreference.addEventListener("change", function () {
+      settings.theme = themePreference.value;
+
+      if (saveSettings()) {
+        applyTheme(settings.theme);
+        showMessage("Appearance preference saved.");
+      }
+    });
+  }
+
 
   // -----------------------------------------
   // SEMESTER CONFIGURATION
@@ -1002,6 +1051,7 @@ refreshDashboard();
 
         if (saveSettings()) {
           renderSemesters();
+          
           showMessage("Semester configuration deleted.");
         }
       }
@@ -1189,6 +1239,12 @@ refreshDashboard();
     if (!document.getElementById("settingsPage")) return;
 
     renderSemesters();
+
+    const themeSelect = document.getElementById("themePreference");
+
+    if (themeSelect) {
+        themeSelect.value = settings.theme;
+    }
 
     document.getElementById("defaultPeriod").value = settings.defaultPeriod;
 

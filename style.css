@@ -5,10 +5,38 @@
   box-sizing: border-box;
 }
 
+/* THEME COLOUR VARIABLES */
+
+:root {
+    color-scheme: light;
+
+    --page-bg: #f5f7f5;
+    --surface: #ffffff;
+    --text-primary: #222222;
+    --text-secondary: #666666;
+    --border-color: #eeeeee;
+    --input-bg: #ffffff;
+    --input-text: #333333;
+}
+
+/* DARK THEME */
+
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    --page-bg: #121812;
+    --surface: #1e261f;
+    --text-primary: #f1f5f1;
+    --text-secondary: #b0b9b1;
+    --border-color: #354036;
+    --input-bg: #263027;
+    --input-text: #f1f5f1;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5f7f5;
-  color: #222;
+  background-color: var(--page-bg);
+  color: var(--text-primary);
 }
 
 /* MAIN APPLICATION LAYOUT */
@@ -20,8 +48,8 @@ body {
 /* SIDEBAR */
 .sidebar {
   width: 250px;
-  background-color: #111;
-  color: white;
+  background-color: var(--surface);
+  color: var(--text-primary);
   padding: 25px 15px;
 }
 
@@ -36,7 +64,7 @@ body {
 }
 
 .logo span {
-  color: #32a852;
+  color: var(--text-primary);
 }
 
 /* NAVIGATION */
@@ -48,7 +76,7 @@ body {
 
 .nav-heading {
   font-size: 11px;
-  color: #999;
+  color: var(--text-secondary);
   font-weight: bold;
   margin: 22px 10px 8px;
   letter-spacing: 1px;
@@ -59,7 +87,7 @@ body {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: #ccc;
+  color: var(--text-secondary);
   padding: 12px 14px;
   border-radius: 7px;
   font-size: 14px;
@@ -73,14 +101,14 @@ body {
 }
 
 .nav-link:hover {
-  background-color: #252525;
-  color: white;
+  background-color: var(--surface);
+  color: var(--text-primary);
 }
 
 /* ACTIVE NAVIGATION TAB */
 .nav-link.active {
-  background-color: #218c43;
-  color: white;
+  background-color: var(--surface);
+  color: var(--text-primary);
 }
 
 /* MAIN CONTENT */
@@ -91,12 +119,12 @@ body {
 
 /* TOP BAR */
 .topbar {
-  background-color: white;
+  background-color: var(--surface);
   padding: 22px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .topbar h2 {
@@ -104,7 +132,7 @@ body {
 }
 
 .profile {
-  color: #555;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
@@ -118,7 +146,7 @@ body {
 }
 
 .page-content p {
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -135,8 +163,8 @@ body {
   height: 40px;
   border: none;
   border-radius: 7px;
-  background-color: #f0f5f0;
-  color: #222;
+  background-color: var(--input-bg);
+  color: var(--input-text);
   font-size: 22px;
   cursor: pointer;
   transition: 0.3s ease;
@@ -225,11 +253,11 @@ body {
 .dashboard-header h1 {
   font-size: 25px;
   margin-bottom: 8px;
-  color: #222;
+  color: var(--text-primary);
 }
 
 .dashboard-header p {
-  color: #777;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
@@ -241,15 +269,15 @@ body {
 
 .dashboard-filter label {
   font-size: 13px;
-  color: #555;
+  color: var(--text-secondary);
 }
 
 .dashboard-filter select {
   padding: 10px 13px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 7px;
-  background: white;
-  color: #333;
+  background: var(--input-bg);
+  color: var(--input-text);
   cursor: pointer;
 }
 
@@ -265,9 +293,9 @@ body {
 }
 
 .summary-card {
-  background: white;
+  background: var(--surface);
   padding: 22px;
-  border: 1px solid #eeeeee;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   transition:
@@ -303,23 +331,23 @@ body {
 
 .summary-card p {
   font-size: 13px;
-  color: #777;
+  color: var(--text-secondary);
   margin-bottom: 9px;
 }
 
 .summary-card h2 {
   font-size: 23px;
-  color: #222;
+  color: var(--text-primary);
   margin-bottom: 9px;
 }
 
 .summary-card .card-note {
   font-size: 12px;
-  color: #888;
+  color: var(--text-secondary);
 }
 
 .positive-balance {
-  color: #218c43 !important;
+  color: var(--text-positive) !important;
 }
 
 /* ==============================
@@ -338,8 +366,8 @@ body {
 ================================= */
 
 .dashboard-card {
-  background: white;
-  border: 1px solid #eeeeee;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 22px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
@@ -356,17 +384,17 @@ body {
 
 .section-heading h3 {
   font-size: 16px;
-  color: #222;
+  color: var(--text-primary);
   margin-bottom: 7px;
 }
 
 .section-heading p {
   font-size: 12px;
-  color: #888;
+  color: var(--text-secondary);
 }
 
 .percentage {
-  color: #218c43;
+  color: var(--text-positive);
   font-weight: bold;
   font-size: 17px;
 }
@@ -396,7 +424,7 @@ body {
   justify-content: space-between;
   gap: 10px;
   font-size: 12px;
-  color: #777;
+  color: var(--text-secondary);
 }
 
 /* ==============================
@@ -418,12 +446,12 @@ body {
 
 .household-info span {
   font-size: 13px;
-  color: #777;
+  color: var(--text-secondary);
 }
 
 .household-info strong {
   font-size: 13px;
-  color: #222;
+  color: var(--text-primary);
   text-align: right;
 }
 
@@ -473,17 +501,17 @@ body {
 
 .transaction-item div strong {
   font-size: 13px;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .transaction-item div span {
   font-size: 11px;
-  color: #999;
+  color: var(--text-secondary);
 }
 
 .transaction-item > strong {
   font-size: 13px;
-  color: #333;
+  color: var(--text-primary);
 }
 
 /* ==============================
@@ -670,14 +698,14 @@ body {
 
 .settings-heading h3 {
   font-size: 16px;
-  color: #222;
+  color: var(--text-primary);
   margin-bottom: 6px;
 }
 
 .settings-heading p,
 .settings-description {
   font-size: 12px;
-  color: #888;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -696,7 +724,7 @@ body {
 
 .settings-section h4 {
   font-size: 14px;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 7px;
 }
 
@@ -721,7 +749,7 @@ body {
 .form-group label {
   font-size: 12px;
   font-weight: 600;
-  color: #555;
+  color: var(--text-secondary);
 }
 
 .form-group input,
@@ -809,12 +837,12 @@ body {
 
 .semester-details strong {
   font-size: 13px;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .semester-details span {
   font-size: 11px;
-  color: #888;
+  color: var(--text-secondary);
 }
 
 .semester-actions {
@@ -874,12 +902,12 @@ body {
 
 .setting-toggle strong {
   font-size: 13px;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .setting-toggle small {
   font-size: 11px;
-  color: #888;
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
