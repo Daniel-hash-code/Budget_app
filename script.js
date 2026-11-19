@@ -367,96 +367,96 @@ if (periodFilter) {
   refreshDashboard();
 }
 
-// GET THE HTML ELEMENTS
+
+// ======================================
+// SIDEBAR AND MULTI-PAGE NAVIGATION
+// ======================================
+
 const appContainer = document.getElementById("appContainer");
 const menuToggle = document.getElementById("menuToggle");
 const navigationLinks = document.querySelectorAll(".nav-link");
 
-const pageTitle = document.getElementById("pageTitle");
-const welcomeTitle = document.getElementById("welcomeTitle");
-const welcomeText = document.getElementById("welcomeText");
+// --------------------------------------
+// RESTORE SIDEBAR STATE
+// --------------------------------------
 
-// SIDEBAR EXPAND AND COLLAPSE
+if (appContainer) {
+  const savedSidebarState = localStorage.getItem(
+    "roomieSidebarCollapsed"
+  );
 
-// RESTORE SIDEBAR STATE WHEN A PAGE LOADS
-const savedSidebarState = localStorage.getItem("roomieSidebarCollapsed");
-
-// Default to collapsed if no previous preference exists
-if (savedSidebarState === null || savedSidebarState === "true") {
-  appContainer.classList.add("sidebar-collapsed");
-} else {
-  appContainer.classList.remove("sidebar-collapsed");
+  // Default to collapsed if no preference exists.
+  if (savedSidebarState === null || savedSidebarState === "true") {
+    appContainer.classList.add("sidebar-collapsed");
+  } else {
+    appContainer.classList.remove("sidebar-collapsed");
+  }
 }
 
-// Update the button accessibility state
-const initiallyExpanded = !appContainer.classList.contains("sidebar-collapsed");
+// --------------------------------------
+// SIDEBAR EXPAND AND COLLAPSE
+// --------------------------------------
 
-menuToggle.setAttribute("aria-expanded", initiallyExpanded);
-menuToggle.setAttribute(
-  "aria-label",
-  initiallyExpanded ? "Collapse navigation" : "Expand navigation",
-);
+if (appContainer && menuToggle) {
+  const initiallyExpanded =
+    !appContainer.classList.contains("sidebar-collapsed");
 
-// SIDEBAR TOGGLE
-menuToggle.addEventListener("click", function () {
-  appContainer.classList.toggle("sidebar-collapsed");
-
-  const isExpanded = !appContainer.classList.contains("sidebar-collapsed");
-
-  // Remember the selected state
-  localStorage.setItem("roomieSidebarCollapsed", !isExpanded);
-
-  menuToggle.setAttribute("aria-expanded", isExpanded);
+  menuToggle.setAttribute("aria-expanded", initiallyExpanded);
   menuToggle.setAttribute(
     "aria-label",
-    isExpanded ? "Collapse navigation" : "Expand navigation",
+    initiallyExpanded ? "Collapse navigation" : "Expand navigation"
   );
-});
 
-// 2. NAVIGATION TAB SELECTION
+  menuToggle.addEventListener("click", function () {
+    appContainer.classList.toggle("sidebar-collapsed");
+
+    const isExpanded =
+      !appContainer.classList.contains("sidebar-collapsed");
+
+    // Remember the user's sidebar preference.
+    localStorage.setItem("roomieSidebarCollapsed", !isExpanded);
+
+    menuToggle.setAttribute("aria-expanded", isExpanded);
+    menuToggle.setAttribute(
+      "aria-label",
+      isExpanded ? "Collapse navigation" : "Expand navigation"
+    );
+  });
+}
+
+// --------------------------------------
+// HIGHLIGHT THE CURRENT PAGE
+// --------------------------------------
+
+// Get the filename of the page currently open.
+const currentPage =
+  window.location.pathname.split("/").pop() || "index.html";
+
 navigationLinks.forEach(function (link) {
-  // Copy the navigation button so we can extract its label
+  // Set a tooltip using the link's visible text.
   const labelElement = link.cloneNode(true);
-  // Remove the icon from the copied button
   const iconElement = labelElement.querySelector("span");
 
   if (iconElement) {
     iconElement.remove();
   }
 
-  // Use only the remaining text as the tooltip
   link.setAttribute("data-tooltip", labelElement.textContent.trim());
-  link.addEventListener("click", function (event) {
-    if (link.getAttribute("href") !== "#") return;
-    // Prevent the browser from opening another page
-    event.preventDefault();
 
-    // Remove active status from all tabs
-    navigationLinks.forEach(function (item) {
-      item.classList.remove("active");
-    });
+  // Compare the link's destination with the current page.
+  const linkPage = new URL(link.href, window.location.href)
+    .pathname.split("/")
+    .pop();
 
-    // Highlight the clicked tab
+  if (linkPage === currentPage) {
     link.classList.add("active");
-
-    // Get the selected tab's name
-    const selectedPage = link.dataset.page;
-
-    // Get its visible text
-    const selectedName = link.textContent.trim();
-
-    // Update the top bar heading
-    pageTitle.textContent = selectedName;
-
-    // Update the welcome section
-    welcomeTitle.textContent = selectedName;
-
-    welcomeText.textContent =
-      "Welcome to your " +
-      selectedName +
-      " section. Your page content will appear here.";
-  });
+    link.setAttribute("aria-current", "page");
+  } else {
+    link.classList.remove("active");
+    link.removeAttribute("aria-current");
+  }
 });
+
 
 // ======================================
 // DYNAMIC DASHBOARD CHARTS
